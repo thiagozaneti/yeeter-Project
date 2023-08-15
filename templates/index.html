@@ -23,6 +23,7 @@
     </style>
 </head>
 <body>
+    <!-- login form --> 
     <div class="form-container">
         {% if message %}
         <div class="alert alert-info">
@@ -48,6 +49,9 @@
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
                 <label class="form-check-label" for="exampleCheck1">Aceito os termos de politica e privacidade</label>
+            </div>
+             <div class="mb-3">
+                <a href="{{url_for("home.html")}}">Faça o login</a>
             </div>
             <button name="submit" type="submit" class="btn btn-primary">Cadastrar</button>
             <h1>{{adq}}</h1>

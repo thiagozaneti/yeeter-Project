@@ -1,20 +1,16 @@
-
 from flask import Flask, request, render_template, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
-db = SQLAlchemy()
-
 app = Flask(__name__)
-
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
-        
+app.config['SECRET_KEY'] = 'minhachave'
+db = SQLAlchemy(app)
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String, unique=True, nullable=False)
-    email = db.Column(db.String)
-    senha = db.Column(db.String)
-    
-    
+    username = db.Column(db.String(20), unique=True, nullable=False)
+    email = db.Column(db.String(50), unique=True, nullable=False) 
+    senha = db.Column(db.String(20), nullable=False)  
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
@@ -22,32 +18,29 @@ def index():
     if request.method == "POST":
         id = request.form['id']
         username = request.form['username']
-        email = request.form['email'] 
-        senha = request.form['senha']  
+        email = request.form['email']
+        senha = request.form['senha']
         
-        if len(senha) <=4:
-            message = f"senha fraca"
-        if len(email) <=5:
-            message = f'email fraco'
-        if len(username) <=4:
-            message = f'nome de usuario fraco'
+        if len(senha) <= 4:
+            message = "Senha fraca"
+        elif len(email) <= 5:
+            message = "E-mail fraco"
+        elif len(username) <= 4:
+            message = "Nome de usuário fraco"
         else:
-            user = User(email=email, senha=senha, username = username, id = id)  
+            user = User(id=id, username=username, email=email, senha=senha)  
             db.session.add(user)
             db.session.commit()
-            message="cadastro realizado com sucesso!"
-            return redirect(url_for('home.html', username = username))
+            message = "Cadastro realizado com sucesso!"
+            return render_template('home.html', username=username)
     
     return render_template("index.html", message=message)
 
 @app.route("/login")
 def cad():
-    msg = "login efetuado com sucesso"
+    msg = "Login efetuado com sucesso"
     return render_template("index.html", msg=msg)
 
-db.init_app(app)
-
 if __name__ == "__main__":
-    db.init_app(app)
     db.create_all()
     app.run()
