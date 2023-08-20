@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="d-flex justify-content-center m-5">
+  <form method="post" action="{{url_for('postagem')}}">
+    <!-- Name input -->
+    <div class="form-outline mb-4">
+      <label class="form-label text-white" for="form4Example1">Titulo</label>
+      <input type="text" id="form4Example1" class="form-control" name="titulo" />
+    </div>
+  
+    <!-- Message input -->
+    <div class="form-outline mb-4">
+      <label class="form-label text-white" for="form4Example3">Mensagem</label>
+      <textarea class="form-control" id="form4Example3" rows="4" name="mensagem"></textarea>
+    </div>
+  
+    <!-- Checkbox -->
+    <div class="form-check d-flex justify-content-center mb-4">
+      <input class="form-check-input me-2" type="checkbox" value="" id="form4Example4" checked />
+      <label class="form-check-label text-white" for="form4Example4">
+        Confirmo minha responsabilidade
+      </label>
+    </div>
+  
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary btn-block mb-4">Adicionar mensagem</button>
+  </form></div>
+
+{% endblock %}
