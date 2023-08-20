@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login YEET</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+        html{
+            scroll-behavior: smooth;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-color: black;
+        }
+        .form-container {
+            width: 400px;
+            padding: 20px;
+            margin-top: 20px; 
+            border-radius: 5px;
+            background-color: #252323;
+            color: white;
+        }
+        .custom-alert {
+            border: none;
+            border-radius: 8px;
+            padding: 10px 15px;
+            background-color: #cce5ff; /* Cor de fundo */
+            color: #004085; /* Cor do texto */
+            font-size: 16px;
+            margin-bottom: 20px; 
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); 
+        }
+    </style>
+</head>
+<body>
+    <img src="/static/image/Design sem nome (9).png" alt="error" width="70px">
+    <div class="form-container">
+        {% if message %}
+        <div class="alert alert-info">
+            <p>{{message}}</p>
+        </div>
+        {% endif %}
+        <form action="{{ url_for("login")}}" method="POST">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                <div id="emailHelp" class="form-text">Escreva o email</div>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Senha</label>
+                <input type="password" class="form-control" name="senha" id="exampleInputPassword1" required>
+            </div>
+            <button name="submit" type="submit" class="btn btn-primary">LOGAR</button>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>
